@@ -1,24 +1,24 @@
 import java.util.Random;
 
 class MagicBox<T> {
-    private int n;
+    private int size;
     private T arr[];
 
-    MagicBox(int n) {
-        this.n = n;
-        arr = (T[]) new Object[n];
+    MagicBox(int size) {
+        this.size = size;
+        arr = (T[]) new Object[size];
     }
 
     boolean add(T item) {
-        int k = -1;
-        for (int i = 0; i < n; ++i) {
+        int counter = -1;
+        for (int i = 0; i < size; ++i) {
             if (arr[i] == null) {
-                k = i;
+                counter = i;
                 break;
             }
         }
-        if (k > -1) {
-            arr[k] = item;
+        if (counter > -1) {
+            arr[counter] = item;
             return true;
         } else {
             return false;
@@ -26,18 +26,18 @@ class MagicBox<T> {
     }
 
     T pick() {
-        int k = -1;
-        for (int i = 0; i < this.n; ++i) {
+        int counter = -1;
+        for (int i = 0; i < this.size; ++i) {
             if (this.arr[i] == null) {
-                k = i;
+                counter = i;
                 break;
             }
         }
-        if (k > -1) {
-            throw new RuntimeException("Коробка еще не полна, свободых мест: " + Integer.toString(this.n - k));
+        if (counter > -1) {
+            throw new RuntimeException("Коробка еще не полна, свободых мест: " + Integer.toString(this.size - counter));
         } else {
             Random random = new Random();
-            int randomInt = random.nextInt(this.n);
+            int randomInt = random.nextInt(this.size);
             return arr[randomInt];
         }
     }
